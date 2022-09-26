@@ -1,0 +1,185 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "TAPER",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/close-order": {
+            "post": {
+                "tags": [
+                    "События"
+                ],
+                "summary": "Событие закрытия заказа",
+                "operationId": "efc7e36aacd5d2c76b7688b300b82222",
+                "requestBody": {
+                    "description": "Properties",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "session"
+                                ],
+                                "properties": {
+                                    "session": {
+                                        "description": "session",
+                                        "type": "number",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Упешная отправка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "required": [
+                                        "success",
+                                        "result"
+                                    ],
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/partial-payment": {
+            "post": {
+                "tags": [
+                    "События"
+                ],
+                "summary": "Событие оплаты заказа",
+                "operationId": "fec15f7b11910ecbc20e4cbd768fd2b3",
+                "requestBody": {
+                    "description": "Properties",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "session"
+                                ],
+                                "properties": {
+                                    "session": {
+                                        "description": "session",
+                                        "type": "number",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Упешная отправка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "required": [
+                                        "success",
+                                        "result"
+                                    ],
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/change-order-position": {
+            "post": {
+                "tags": [
+                    "События"
+                ],
+                "summary": "Событие изменения заказа",
+                "operationId": "5ee3371f1c16bdecac8966b661278f8d",
+                "requestBody": {
+                    "description": "Properties",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "session",
+                                    "message",
+                                    "massive"
+                                ],
+                                "properties": {
+                                    "session": {
+                                        "description": "session",
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "message": {
+                                        "description": "ok",
+                                        "type": "string",
+                                        "example": "1"
+                                    },
+                                    "massive": {
+                                        "description": "massive",
+                                        "type": "string",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Упешная отправка",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "required": [
+                                        "success",
+                                        "result"
+                                    ],
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
