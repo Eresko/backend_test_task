@@ -47,7 +47,6 @@ class EventController {
         $validated = $request->validate([
             'session' => 'required|integer'
         ]);
-
         broadcast(new CloseOrder(intval($request->session)));
         return response()->json(
             ['success' => true]
@@ -91,7 +90,6 @@ class EventController {
         $validated = $request->validate([
             'session' => 'required|integer'
         ]);
-        
         broadcast(new PartialPayment(intval($request->session)));
         return response()->json(
             ['success' => true]
@@ -148,11 +146,16 @@ class EventController {
         $validated = $request->validate([
             'session' => 'required|integer',
             'message' => 'required|string',
-            'massive' => 'required|array'
+            'massive' => 'sometimes|array'
         ]);
-        file_put_contents(base_path() . '/storage/first.txt', print_r($validated, true), FILE_APPEND | LOCK_EX);
+
         foreach ($request->massive as $item) {
             broadcast(new ChangeOrderPosition(intval($request->session),$request->message,$item));
+        }
+        if ((empty($request->massive)) && ($request->message== 'update order')){
+            
+            broadcast(new ChangeOrderPosition(intval($request->session),$request->message,[]));
+
         }
 
         return response()->json(
