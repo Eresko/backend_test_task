@@ -169,7 +169,7 @@ class EventController {
      * @OA\Post(
      *     path="/api/set-discount",
      *     tags={"События"},
-     *     summary="Событие оплаты заказа",
+     *     summary="Событие применение скидки",
      *     @OA\RequestBody(description="Properties", required=true,
      *          @OA\JsonContent(
      *              type="object",
