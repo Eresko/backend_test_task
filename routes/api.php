@@ -19,4 +19,6 @@ Route::post('/close-order', [Event::class, 'closeOrder']);
 Route::post('/partial-payment', [Event::class, 'partialPayment']);
 Route::post('/change-order-position', [Event::class, 'changeOrderPosition']);
 Route::post('/set-discount', [Event::class, 'setDiscount']);
+Route::post('/waiting-discount', [Event::class, 'waitingDiscount']);
+Route::post('/discount-not-applied', [Event::class, 'discountNotApplied']);
 

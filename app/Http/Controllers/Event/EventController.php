@@ -207,6 +207,91 @@ class EventController {
             ['success' => true]
         );
     }
+    /**
+     * @OA\Post(
+     *     path="/api/waiting-discount",
+     *     tags={"События"},
+     *     summary="Событие ожидание применения скидки",
+     *     @OA\RequestBody(description="Properties", required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *                 required={"session"},
+     *                @OA\Property(
+     *                     property="session",
+     *                     description="session",
+     *                     type="number",
+     *                     example="1"
+     *                 ),
+     *          ),
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Упешная отправка",
+     *         @OA\JsonContent(
+     *                 type="object",
+     *                 required={"success","result"},
+     *                 @OA\Property(
+     *                     property="success",
+     *                     type="boolean",
+     *                 ),
+     *          ),
+     *     )
+     * )
+     */
+    public function waitingDiscount(Request $request)
+    {
+
+        $validated = $request->validate([
+            'session' => 'required|integer'
+        ]);
+        broadcast(new WaitingDiscount(intval($request->session)));
+        return response()->json(
+            ['success' => true]
+        );
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/api/discount-not-applied",
+     *     tags={"События"},
+     *     summary="Событие ожидание применения скидки",
+     *     @OA\RequestBody(description="Properties", required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *                 required={"session"},
+     *                @OA\Property(
+     *                     property="session",
+     *                     description="session",
+     *                     type="number",
+     *                     example="1"
+     *                 ),
+     *          ),
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Упешная отправка",
+     *         @OA\JsonContent(
+     *                 type="object",
+     *                 required={"success","result"},
+     *                 @OA\Property(
+     *                     property="success",
+     *                     type="boolean",
+     *                 ),
+     *          ),
+     *     )
+     * )
+     */
+    public function discountNotApplied(Request $request)
+    {
+
+        $validated = $request->validate([
+            'session' => 'required|integer'
+        ]);
+        broadcast(new WaitingDiscount(intval($request->session)));
+        return response()->json(
+            ['success' => true]
+        );
+    }
 
 
 
