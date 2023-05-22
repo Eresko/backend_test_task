@@ -6,6 +6,8 @@ use App\Events\CloseOrder;
 use App\Events\PartialPayment;
 use App\Events\ChangeOrderPosition;
 use App\Events\SetDiscount;
+use App\Events\DiscountNotAppliedEvents;
+use App\Events\WaitingDiscount;
 use App\Jobs\PartialPaymentJobs;
 use Illuminate\Http\Request;
 
@@ -287,7 +289,7 @@ class EventController {
         $validated = $request->validate([
             'session' => 'required|integer'
         ]);
-        broadcast(new WaitingDiscount(intval($request->session)));
+        broadcast(new DiscountNotAppliedEvents(intval($request->session)));
         return response()->json(
             ['success' => true]
         );
