@@ -12,7 +12,7 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**
-     * @OA\Info(title="TAPER", version="0.1")
+     * @OA\Info(title="TEST", version="0.1")
      * @OA\SecurityScheme(
      *      securityScheme="bearerAuth",
      *      in="header",
