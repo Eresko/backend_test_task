@@ -86,7 +86,7 @@ class FilesController {
     {
 
         return response()->json([
-            'result' => $this->filesService->get(intval($request->page),$this->search)
+            'result' => $this->filesService->get(intval($request->page),empty($request->search) ? "" : $request->search)
         ]);
     }
 
