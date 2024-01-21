@@ -5,47 +5,91 @@
         "version": "0.1"
     },
     "paths": {
-        "/api/close-order": {
-            "post": {
+        "/api/nomenclature/list": {
+            "get": {
                 "tags": [
-                    "События"
+                    "Файлы"
                 ],
-                "summary": "Событие закрытия заказа",
-                "operationId": "efc7e36aacd5d2c76b7688b300b82222",
-                "requestBody": {
-                    "description": "Properties",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "session"
-                                ],
-                                "properties": {
-                                    "session": {
-                                        "description": "session",
-                                        "type": "number",
-                                        "example": "1"
-                                    }
-                                },
-                                "type": "object"
-                            }
+                "summary": "Список файлов",
+                "operationId": "1890b5732fdbda96dceeb8ca03417b23",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
                         }
                     }
-                },
+                ],
                 "responses": {
                     "200": {
-                        "description": "Упешная отправка",
+                        "description": "",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "required": [
-                                        "success",
                                         "result"
                                     ],
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean"
+                                        "result": {
+                                            "required": [
+                                                "currentPage",
+                                                "perPage",
+                                                "total",
+                                                "lastPage",
+                                                "data"
+                                            ],
+                                            "properties": {
+                                                "currentPage": {
+                                                    "description": "Текущая страница",
+                                                    "type": "integer"
+                                                },
+                                                "perPage": {
+                                                    "description": "Колличество элементов на странице",
+                                                    "type": "integer"
+                                                },
+                                                "total": {
+                                                    "description": "Общее количество элементов",
+                                                    "type": "integer"
+                                                },
+                                                "lastPage": {
+                                                    "description": "Последняя страница",
+                                                    "type": "integer"
+                                                },
+                                                "data": {
+                                                    "description": "Данные",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "description": "id элемента",
+                                                                "type": "integer"
+                                                            },
+                                                            "name": {
+                                                                "description": "название файла",
+                                                                "type": "string"
+                                                            },
+                                                            "created_at": {
+                                                                "description": "дата создания",
+                                                                "type": "string"
+                                                            },
+                                                            "updated_at": {
+                                                                "description": "дата изменения",
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -56,47 +100,72 @@
                 }
             }
         },
-        "/api/partial-payment": {
-            "post": {
+        "/api/nomenclature/get/{id}": {
+            "get": {
                 "tags": [
-                    "События"
+                    "Файлы"
                 ],
-                "summary": "Событие оплаты заказа",
-                "operationId": "fec15f7b11910ecbc20e4cbd768fd2b3",
-                "requestBody": {
-                    "description": "Properties",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "session"
-                                ],
-                                "properties": {
-                                    "session": {
-                                        "description": "session",
-                                        "type": "number",
-                                        "example": "1"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
+                "summary": "Содержимое файла",
+                "operationId": "6ee5ece36f4f8980610135805cef1265",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
                     }
-                },
+                ],
                 "responses": {
                     "200": {
-                        "description": "Упешная отправка",
+                        "description": "",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "required": [
-                                        "success",
                                         "result"
                                     ],
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean"
+                                        "result": {
+                                            "required": [
+                                                "name",
+                                                "created_at",
+                                                "updated_at",
+                                                "file_element"
+                                            ],
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "created_at": {
+                                                    "type": "number"
+                                                },
+                                                "updated_at": {
+                                                    "type": "number"
+                                                },
+                                                "file_element": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer"
+                                                            },
+                                                            "file_id": {
+                                                                "type": "integer"
+                                                            },
+                                                            "line": {
+                                                                "type": "json"
+                                                            },
+                                                            "created_at": {
+                                                                "type": "string"
+                                                            },
+                                                            "updated_at": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -107,39 +176,23 @@
                 }
             }
         },
-        "/api/change-order-position": {
+        "/api/nomenclature/upload-file": {
             "post": {
                 "tags": [
-                    "События"
+                    "Операции с файлами"
                 ],
-                "summary": "Событие изменения заказа",
-                "operationId": "5ee3371f1c16bdecac8966b661278f8d",
+                "summary": "загрузка csv файла",
+                "operationId": "bed416331cf0e903c0e432522f3aeb52",
                 "requestBody": {
-                    "description": "Properties",
-                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "session",
-                                    "message",
-                                    "massive"
+                                    "file"
                                 ],
                                 "properties": {
-                                    "session": {
-                                        "description": "session",
-                                        "type": "number",
-                                        "example": "1"
-                                    },
-                                    "message": {
-                                        "description": "ok",
-                                        "type": "string",
-                                        "example": "1"
-                                    },
-                                    "massive": {
-                                        "description": "massive",
-                                        "type": "string",
-                                        "example": "1"
+                                    "file": {
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"

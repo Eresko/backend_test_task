@@ -1,5 +1,6 @@
 <?php
-use App\Http\Controllers\Event\EventController as  Event;
+use App\Http\Controllers\Nomenclature\UploadController;
+use App\Http\Controllers\Nomenclature\FilesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/close-order', [Event::class, 'closeOrder']);
-Route::post('/partial-payment', [Event::class, 'partialPayment']);
-Route::post('/change-order-position', [Event::class, 'changeOrderPosition']);
-Route::post('/set-discount', [Event::class, 'setDiscount']);
-Route::post('/waiting-discount', [Event::class, 'waitingDiscount']);
-Route::post('/discount-not-applied', [Event::class, 'discountNotApplied']);
 
+
+Route::group([ 'prefix' => 'nomenclature'], function () {
+    Route::post('upload-file', [UploadController::class, 'uploadFile']);
+    Route::get('list', [FilesController::class, 'listFiles']);
+    Route::get('get/{id}', [FilesController::class, 'getFile']);
+});
